@@ -2,9 +2,9 @@
 
 (in-package 'user)
 
-(proclaim '(inline sqr))  ; Instruction to the compiler to compile the sqr 
+(proclaim '(inline sqr))  ; Instruction to the compiler to compile the sqr
                           ; function inline.
-(proclaim '(inline if*))  ; Instruction to the compiler to compile the 
+(proclaim '(inline if*))  ; Instruction to the compiler to compile the
                           ; if* function inline.
 ;---------------------------------------------
 
@@ -12,8 +12,8 @@
 
 ;---------------------------------------------
 
-(defmacro if* (&rest args &aux args-length if-clause then-clause 
-		               else-clause else-position)
+(defmacro if* (&rest args &aux args-length if-clause then-clause
+                   else-clause else-position)
 ; If-then-else macro.  This provides if-then-else statements of the form
 ; (if <stmt> then <stmt1> <stmt2> ... else <stmt1> <stmt2> ...)
 
@@ -27,9 +27,8 @@
            (if (null else-position) (setq else-position args-length))
            (setq then-clause (subseq args 2 else-position))
            (if (< else-position args-length)
-               (setq else-clause (subseq args (1+ else-position) 
-					      args-length))
+               (setq else-clause (subseq args (1+ else-position)
+                                  args-length))
                (setq else-clause (list nil)))
            `(cond ,(cons if-clause then-clause)
-	          ,(cons t else-clause)))))
-  
+             ,(cons t else-clause)))))
